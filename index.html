@@ -36,29 +36,34 @@
         <button type="button" data-mode="primary" aria-pressed="true">Recommended</button>
         <button type="button" data-mode="all" aria-pressed="false">Include alternatives</button>
       </div>
-      <input id="query" type="search" aria-label="Filter sessions" placeholder="Filter by topic, title, or relevance...">
+      <input id="query" type="search" aria-label="Filter sessions and social activities" placeholder="Filter sessions, socials, or venues...">
     </section>
     <p class="results" id="results" role="status">Loading team sessions...</p>
     <section id="schedule" class="schedule" aria-label="Recommended conference agenda"></section>
     <noscript><p class="empty">Enable JavaScript to display the agenda, filters, and venue map.</p></noscript>
 
-    <section class="evening" aria-labelledby="evening-heading">
+    <section class="evening" id="social-section" aria-labelledby="evening-heading">
       <div class="section-heading">
-        <div class="eyebrow">Wednesday evening | October 28</div>
-        <h2 id="evening-heading">Happy hour recommendations</h2>
-        <p>Five nearby partner gatherings for technical peer exchange and team networking around GitHub Universe at Fort Mason.</p>
+        <div class="eyebrow" id="social-days">Wednesday &amp; Thursday | October 28-29</div>
+        <h2 id="evening-heading">Social activities &amp; networking</h2>
+        <p>All listed Wednesday and Thursday sponsor gatherings, networking programs, lunch seatings, and the official Women in Tech reception. Social options remain visible in both session-selection modes; use the day buttons or search to narrow the list.</p>
       </div>
-      <div class="callout"><strong>Team networking:</strong> Consider Faros for engineering-outcome measurement or Cloudsmith for secure delivery and software-supply-chain conversations. Compare session takeaways across Principal Financial's development, platform, and security teams. Choose a primary gathering rather than trying to attend all five; confirm host details and RSVP before making plans.</div>
-      <div class="map-and-venues">
-        <div id="venue-map" role="region" aria-label="Map of happy hour venues near GitHub Universe"></div>
-        <div id="venues" class="venues"></div>
+      <div class="callout"><strong>Optional, not booked:</strong> Many activities overlap sessions or each other. Unconfirmed dates, times, venues, and eligibility are stated on each card. Some events require an invitation, host approval, or special credentials; their inclusion does not create a separate leadership track or imply team-wide access. Tuesday activities and undated briefings are outside this two-day list.</div>
+      <p class="results" id="social-results" role="status">Loading social activities...</p>
+      <div id="social-activities" class="schedule"></div>
+      <div id="mapped-socials">
+        <h3 class="map-heading">Nearby Wednesday venue map</h3>
+        <p class="map-note">Map reference for five previously mapped sponsor venues, not every activity above. Other venues are listed on their cards; unconfirmed locations are not plotted. Use live directions for accessibility and current conditions.</p>
+        <div class="map-and-venues">
+          <div id="venue-map" role="region" aria-label="Map of listed Wednesday social venues"></div>
+          <div id="venues" class="venues"></div>
+        </div>
       </div>
-      <p class="map-note">Event access is not reserved. Faros timing and all Xebia/Slalom details remain unconfirmed. Other published details must be reconfirmed with the host. Venue positions are reference points, not measured walking routes; use live directions for accessibility and current conditions.</p>
     </section>
     <footer>
       <p><strong>Team coordination:</strong> This is one shared team route, not separate attendee or leadership tracks. Use the alternatives to divide coverage across code quality, agent controls, productivity measurement, and operations, then compare notes. Turn the most useful lessons into follow-up questions for your account team; no meeting or program access is reserved.</p>
       <p><strong>Planning:</strong> Times are PDT (UTC-7). The recommended sequence has no time overlaps. Transfers assume 10 minutes within a building or 15 between buildings, plus a minimum five-minute early arrival; allow more for queues and accessibility. Tight transfers are flagged. Official 20-minute early-arrival guidance is shown where applicable. Each alternative has replacement notes covering nearby conflicts and travel. Alternatives can overlap one another; recheck timing if combining several. Leave a session out for a longer lunch or team discussion.</p>
-      <p>Sessions checked against the official Universe catalog on September 22, 2026. Partner-event status reflects research as of September 21, 2026; mapping references the supplied agenda. Public session titles link to the official catalog. No invitations, registrations, or seats are confirmed.</p>
+      <p>Sessions and the Women in Tech reception checked against the official Universe catalog on September 22, 2026. Partner events and add-on details reflect the supplied handoff and research as of September 21, 2026. Figma's Thursday date is unconfirmed and inferred from a conflicting source date. Public session titles link to the official catalog; social cards link to host information where available. No invitations, registrations, or seats are confirmed.</p>
       <p>Prepared for the Principal Financial team by <strong>Lisa LaMountain, Account Executive, GitHub</strong>. Updated September 22, 2026.</p>
     </footer>
   </main>
