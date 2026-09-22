@@ -63,6 +63,7 @@ async function start() {
 
   function render() {
     const tuesday = state.day === "tue";
+    const singleConferenceDay = ["wed", "thu"].includes(state.day);
     const matchesDay = item => state.day === "all"
       ? ["wed", "thu"].includes(item.day)
       : (item.tab || item.day) === state.day;
@@ -110,9 +111,9 @@ async function start() {
     socialNotice.textContent = tuesday
       ? "The welcome reception's date, time, and access remain unconfirmed. Both briefings are by arrangement: date, time, location, and organizer approval must be confirmed with your account team. No appointment or invitation is reserved, and executive eligibility does not imply team-wide access or a separate leadership track."
       : conferenceNotice;
-    if (state.day === "wed") socialNotice.textContent = conferenceNotice.split(";")[0] + ".";
+    if (singleConferenceDay) socialNotice.textContent = conferenceNotice.split(";")[0] + ".";
     document.querySelector("#social-section").insertBefore(
-      socialCallout, tuesday || state.day === "wed" ? mappedSocials : document.querySelector("#social-results"));
+      socialCallout, tuesday || singleConferenceDay ? mappedSocials : document.querySelector("#social-results"));
     document.querySelector("#social-results").textContent = `${visibleSocials.length} ${tuesday ? "optional programs" : "social activities"} \u2022 optional; access and unconfirmed details are noted below`;
     socialList.replaceChildren();
     if (!visibleSocials.length) socialList.append(element("div", "empty", tuesday ? "No add-on programs match the current filters." : "No social activities match the current filters."));
