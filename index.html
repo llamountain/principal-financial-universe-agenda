@@ -27,16 +27,17 @@
       </div>
     </header>
     <section class="filters" aria-label="Agenda filters">
-      <div class="toggle-group" aria-label="Conference day">
-        <button type="button" data-day="all" aria-pressed="true">Both days</button>
+      <div class="toggle-group" aria-label="Agenda day">
+        <button type="button" data-day="all" aria-pressed="true" title="Wednesday and Thursday conference days">Both days</button>
+        <button type="button" data-day="tue" aria-pressed="false">Tuesday</button>
         <button type="button" data-day="wed" aria-pressed="false">Wednesday</button>
         <button type="button" data-day="thu" aria-pressed="false">Thursday</button>
       </div>
-      <div class="toggle-group" aria-label="Session selection">
+      <div class="toggle-group" id="session-selection" aria-label="Session selection">
         <button type="button" data-mode="primary" aria-pressed="true">Recommended</button>
         <button type="button" data-mode="all" aria-pressed="false">Include alternatives</button>
       </div>
-      <input id="query" type="search" aria-label="Filter sessions and social activities" placeholder="Filter sessions, socials, or venues...">
+      <input id="query" type="search" aria-label="Filter sessions, social activities, and add-ons" placeholder="Filter sessions, add-ons, or venues...">
     </section>
     <p class="results" id="results" role="status">Loading team sessions...</p>
     <section id="schedule" class="schedule" aria-label="Recommended conference agenda"></section>
@@ -46,9 +47,9 @@
       <div class="section-heading">
         <div class="eyebrow" id="social-days">Wednesday &amp; Thursday | October 28-29</div>
         <h2 id="evening-heading">Social activities &amp; networking</h2>
-        <p>All listed Wednesday and Thursday sponsor gatherings, networking programs, lunch seatings, and the official Women in Tech reception. Social options remain visible in both session-selection modes; use the day buttons or search to narrow the list.</p>
+        <p id="social-description">All listed Wednesday and Thursday sponsor gatherings, networking programs, lunch seatings, and the official Women in Tech reception. Social options remain visible in both session-selection modes; use the day buttons or search to narrow the list.</p>
       </div>
-      <div class="callout"><strong>Optional, not booked:</strong> Many activities overlap sessions or each other. Unconfirmed dates, times, venues, and eligibility are stated on each card. Some events require an invitation, host approval, or special credentials; their inclusion does not create a separate leadership track or imply team-wide access. Tuesday activities and undated briefings are outside this two-day list.</div>
+      <div class="callout"><strong>Optional, not booked:</strong> <span id="social-notice">Many activities overlap sessions or each other. Unconfirmed dates, times, venues, and eligibility are stated on each card. Some events require an invitation, host approval, or special credentials; their inclusion does not create a separate leadership track or imply team-wide access. "Both days" means Wednesday and Thursday; the separate Tuesday tab contains the welcome reception and two by-arrangement briefings.</span></div>
       <p class="results" id="social-results" role="status">Loading social activities...</p>
       <div id="social-activities" class="schedule"></div>
       <div id="mapped-socials">
@@ -56,7 +57,7 @@
         <p class="map-note">All listed activities are represented below, grouped by venue. Blue pins indicate published event venues; amber pins are provisional locations or approximate campus/pier references, not confirmed destinations. Activities without a defensible location are listed separately, without invented pins. Day and search filters apply to both the map and venue list. Shared venues use one pin; use "Show on map" to inspect nearby pins individually.</p>
         <p class="results" id="map-results" role="status"></p>
         <div class="map-and-venues" id="venue-map-layout">
-          <div id="venue-map" role="region" aria-label="Map of Wednesday and Thursday social venues"></div>
+          <div id="venue-map" role="region" aria-label="Map of social and add-on venues"></div>
           <div id="venues" class="venues" role="region" aria-label="Mapped venues and activities; scroll for all locations" tabindex="0"></div>
         </div>
         <div id="unmapped-socials">

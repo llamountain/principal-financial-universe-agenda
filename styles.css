@@ -20,7 +20,7 @@ h1 { max-width: 760px; margin: 8px 0 10px; font-size: clamp(30px, 5vw, 50px); li
 .stats strong { display: block; font-size: 20px; line-height: 1.2; }
 .stats span { color: var(--secondary); font-size: 12px; }
 .filters { position: sticky; top: 0; z-index: 1000; display: flex; align-items: center; flex-wrap: wrap; gap: 10px; margin: 22px 0 16px; padding-block: 10px; background: #0d1117f0; backdrop-filter: blur(10px); }
-.toggle-group { display: flex; gap: 5px; padding: 4px; border: 1px solid var(--line); border-radius: 10px; background: var(--panel); }
+.toggle-group { display: flex; flex-wrap: wrap; gap: 5px; padding: 4px; border: 1px solid var(--line); border-radius: 10px; background: var(--panel); }
 button { border: 0; border-radius: 7px; background: transparent; padding: 8px 12px; color: var(--secondary); font: inherit; cursor: pointer; }
 button[aria-pressed="true"] { background: #21262d; color: var(--foreground); }
 button:hover { color: var(--foreground); }

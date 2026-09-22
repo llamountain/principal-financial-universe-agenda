@@ -378,6 +378,22 @@
   ],
   "socials": [
     {
+      "id": "social-customer-welcome",
+      "sourceId": "customer-welcome",
+      "day": "tue",
+      "date": "Tue, Oct 27",
+      "time": "6:30 PM - 10:30 PM",
+      "plannedStart": "2026-10-27T18:30:00-07:00",
+      "plannedEnd": "2026-10-27T22:30:00-07:00",
+      "title": "Customer Welcome Reception: Commit Together",
+      "category": "Pre-conference reception",
+      "format": "Invite-only reception",
+      "reason": "Exchange practical ideas on agent governance and developer enablement with enterprise engineering peers.",
+      "room": "Saint Joseph's Arts Society",
+      "note": "Unconfirmed. Invite/nomination and opt-in required; 50% or 100% comp pass. Capacity 500; confirm access.",
+      "url": null
+    },
+    {
       "id": "social-merge-tables-wed-1",
       "sourceId": "merge-tables",
       "day": "wed",
@@ -792,6 +808,40 @@
       "room": "Greens Restaurant | Fort Mason campus",
       "note": "Unconfirmed hours/access; no reserved seats. Closed during Merge Tables and User Groups. Confirm customer eligibility.",
       "url": null
+    },
+    {
+      "id": "social-executive-briefing",
+      "sourceId": "executive-briefing",
+      "day": "undated",
+      "date": "Date to be confirmed",
+      "time": "By arrangement",
+      "plannedStart": null,
+      "plannedEnd": null,
+      "title": "Executive Briefing",
+      "category": "Briefing add-on",
+      "format": "Executive Briefing (EBC)",
+      "reason": "Request a strategic discussion connecting agent adoption, platform direction, and engineering business outcomes.",
+      "room": "Location to be confirmed",
+      "note": "To be scheduled. Executive track; organizer approval and eligibility confirmation required. No appointment reserved. Listed under Tuesday for planning convenience only; not confirmed for Tuesday. Request through your account team.",
+      "url": null,
+      "tab": "tue"
+    },
+    {
+      "id": "social-technical-briefing",
+      "sourceId": "technical-briefing",
+      "day": "undated",
+      "date": "Date to be confirmed",
+      "time": "By arrangement",
+      "plannedStart": null,
+      "plannedEnd": null,
+      "title": "Technical Briefing",
+      "category": "Briefing add-on",
+      "format": "Technical Briefing (TBC)",
+      "reason": "Request technical depth on agent governance, quality controls, and dependable engineering platform operations.",
+      "room": "Location to be confirmed",
+      "note": "To be scheduled. Technical decision-maker audience; organizer approval required. Date, duration, and eligibility unconfirmed. Listed under Tuesday for planning convenience only; not confirmed for Tuesday. Request through your account team.",
+      "url": null,
+      "tab": "tue"
     }
   ],
   "venues": [
@@ -1009,6 +1059,21 @@
       "locationNote": "Approximate campus reference, not the exact Outdoor Theater @ Gateway Plaza entrance. Use the official on-site map and signage for the published reception location."
     },
     {
+      "id": "saint-joseph",
+      "number": 15,
+      "sourceIds": [
+        "customer-welcome"
+      ],
+      "name": "Saint Joseph's Arts Society",
+      "address": "1401 Howard St, San Francisco",
+      "position": [
+        37.7736152,
+        -122.4142982
+      ],
+      "provisional": true,
+      "locationNote": "Venue reference for the proposed Tuesday welcome reception, not confirmation of the event. Date, time, invitation, and access must be confirmed with the organizer."
+    },
+    {
       "id": "jellyfish-tbd",
       "number": null,
       "sourceIds": [
@@ -1043,6 +1108,30 @@
       "position": null,
       "provisional": true,
       "locationNote": "No confirmed location on either day. Special credentials are required; this is not general-pass access."
+    },
+    {
+      "id": "executive-briefing-tbd",
+      "number": null,
+      "sourceIds": [
+        "executive-briefing"
+      ],
+      "name": "Executive Briefing - location to be confirmed",
+      "address": null,
+      "position": null,
+      "provisional": true,
+      "locationNote": "By arrangement; no date, location, or appointment confirmed. Included in the Tuesday tab for planning only, not scheduled for Tuesday."
+    },
+    {
+      "id": "technical-briefing-tbd",
+      "number": null,
+      "sourceIds": [
+        "technical-briefing"
+      ],
+      "name": "Technical Briefing - location to be confirmed",
+      "address": null,
+      "position": null,
+      "provisional": true,
+      "locationNote": "By arrangement; no date, location, or appointment confirmed. Included in the Tuesday tab for planning only, not scheduled for Tuesday."
     }
   ]
 }

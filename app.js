@@ -24,7 +24,8 @@ const agendaCard = (item, social = false) => {
   heading.append(item.url ? externalLink(item.title, item.url, "session-title") : element("span", "session-title", item.title));
   const labels = element("div", "labels");
   labels.append(element("span", "label", item.category));
-  if (social || !item.recommended) labels.append(element("span", "label alternative", social ? "Optional social" : "Alternative"));
+  if (social || !item.recommended) labels.append(element("span", "label alternative",
+    social ? ((item.tab || item.day) === "tue" ? "Optional add-on" : "Optional social") : "Alternative"));
   heading.append(labels);
   const reason = element("p", "reason", item.reason);
   reason.append(element("span", "location", `${item.format} \u00b7 ${item.room}`));
@@ -40,13 +41,19 @@ async function start() {
   if (!Array.isArray(data.sessions) || !Array.isArray(data.socials) || !Array.isArray(data.venues)) {
     throw new Error("Agenda data is not in the expected format");
   }
-  const state = { day: "all", mode: "primary", query: "" };
+  const requestedDay = new URLSearchParams(window.location.search).get("day");
+  const dayTitles = { all: "Wednesday & Thursday", tue: "Tuesday", wed: "Wednesday", thu: "Thursday" };
+  const state = { day: Object.hasOwn(dayTitles, requestedDay) ? requestedDay : "all", mode: "primary", query: "" };
   const schedule = document.querySelector("#schedule");
   const results = document.querySelector("#results");
   const socialList = document.querySelector("#social-activities");
   const venueList = document.querySelector("#venues");
   const mappedSocials = document.querySelector("#mapped-socials");
   const unmappedList = document.querySelector("#unmapped-venues");
+  const socialDescription = document.querySelector("#social-description");
+  const socialNotice = document.querySelector("#social-notice");
+  const conferenceDescription = socialDescription.textContent;
+  const conferenceNotice = socialNotice.textContent;
   const locationsBySource = new Map(data.venues.flatMap(venue => venue.sourceIds.map(id => [id, venue])));
   let map;
   let markers;
@@ -54,14 +61,18 @@ async function start() {
   document.querySelector("#alternative-count").textContent = data.sessions.filter(s => !s.recommended).length;
 
   function render() {
+    const tuesday = state.day === "tue";
+    const matchesDay = item => state.day === "all"
+      ? ["wed", "thu"].includes(item.day)
+      : (item.tab || item.day) === state.day;
     const query = state.query.trim().toLocaleLowerCase();
     const visible = data.sessions.filter(session =>
-      (state.day === "all" || state.day === session.day) &&
+      matchesDay(session) &&
       (state.mode === "all" || session.recommended) &&
       [session.title, session.category, session.reason, session.room].join(" ").toLocaleLowerCase().includes(query)
     );
     const visibleSocials = data.socials.filter(social =>
-      (state.day === "all" || state.day === social.day) &&
+      matchesDay(social) &&
       [social.title, social.category, social.format, social.reason, social.room, social.note,
         locationsBySource.get(social.sourceId).name, locationsBySource.get(social.sourceId).address]
         .join(" ").toLocaleLowerCase().includes(query)
@@ -70,27 +81,37 @@ async function start() {
       button.setAttribute("aria-pressed", String(button.dataset.day === state.day)));
     document.querySelectorAll("[data-mode]").forEach(button =>
       button.setAttribute("aria-pressed", String(button.dataset.mode === state.mode)));
-    results.textContent = `${visible.length} ${visible.length === 1 ? "session" : "sessions"} \u2022 ${state.mode === "primary" ? "sequenced team itinerary" : "alternatives may overlap; follow replacement notes"}`;
-    const socialLink = element("a", "", `${visibleSocials.length} social activities`);
+    results.textContent = tuesday ? "Tuesday planning" : `${visible.length} ${visible.length === 1 ? "session" : "sessions"} \u2022 ${state.mode === "primary" ? "sequenced team itinerary" : "alternatives may overlap; follow replacement notes"}`;
+    const socialLink = element("a", "", `${visibleSocials.length} ${tuesday ? "optional programs" : "social activities"}`);
     socialLink.href = "#social-section";
     results.append(" \u2022 ", socialLink);
     const mapLink = element("a", "", "Venue map");
     mapLink.href = "#mapped-socials";
     if (visibleSocials.length) results.append(" \u2022 ", mapLink);
     schedule.replaceChildren();
-    if (!visible.length) {
+    schedule.hidden = tuesday;
+    document.querySelector("#session-selection").hidden = tuesday;
+    if (!visible.length && !tuesday) {
       schedule.append(element("div", "empty", "No sessions match the current filters."));
     }
     for (const session of visible) schedule.append(agendaCard(session));
     document.querySelector("#social-days").textContent = {
       all: "Wednesday & Thursday | October 28-29",
+      tue: "Tuesday | October 27 + by-arrangement briefings",
       wed: "Wednesday | October 28",
       thu: "Thursday | October 29"
     }[state.day];
-    document.querySelector("#social-results").textContent = `${visibleSocials.length} social activities \u2022 optional; access and unconfirmed details are noted below`;
+    document.querySelector("#evening-heading").textContent = tuesday ? "Tuesday add-ons & briefing options" : "Social activities & networking";
+    socialDescription.textContent = tuesday
+      ? "The proposed Tuesday welcome reception and two optional briefing programs for the Principal Financial team. Briefings are grouped here for planning convenience, not assigned to Tuesday."
+      : conferenceDescription;
+    socialNotice.textContent = tuesday
+      ? "The welcome reception's date, time, and access remain unconfirmed. Both briefings are by arrangement: date, time, location, and organizer approval must be confirmed with your account team. No appointment or invitation is reserved, and executive eligibility does not imply team-wide access or a separate leadership track."
+      : conferenceNotice;
+    document.querySelector("#social-results").textContent = `${visibleSocials.length} ${tuesday ? "optional programs" : "social activities"} \u2022 optional; access and unconfirmed details are noted below`;
     socialList.replaceChildren();
-    if (!visibleSocials.length) socialList.append(element("div", "empty", "No social activities match the current filters."));
-    for (const [day, title] of [["wed", "Wednesday, October 28"], ["thu", "Thursday, October 29"]]) {
+    if (!visibleSocials.length) socialList.append(element("div", "empty", tuesday ? "No add-on programs match the current filters." : "No social activities match the current filters."));
+    for (const [day, title] of [["tue", "Tuesday, October 27 - unconfirmed"], ["wed", "Wednesday, October 28"], ["thu", "Thursday, October 29"], ["undated", "By arrangement - not confirmed for Tuesday"]]) {
       const activities = visibleSocials.filter(social => social.day === day);
       if (activities.length) socialList.append(element("h3", "social-day", title));
       for (const social of activities) socialList.append(agendaCard(social, true));
@@ -129,7 +150,7 @@ async function start() {
     const mappedCount = mapped.reduce((total, venue) => total + venue.activities.length, 0);
     const unmappedCount = socials.length - mappedCount;
     mappedSocials.hidden = venues.length === 0;
-    document.querySelector("#map-heading").textContent = `Venue map: ${state.day === "all" ? "Wednesday & Thursday" : state.day === "wed" ? "Wednesday" : "Thursday"}`;
+    document.querySelector("#map-heading").textContent = `Venue map: ${dayTitles[state.day]}${state.day === "tue" ? " planning" : ""}`;
     document.querySelector("#map-results").textContent = `${mapped.length} map ${mapped.length === 1 ? "location" : "locations"} covering ${mappedCount} ${mappedCount === 1 ? "activity" : "activities"} \u2022 ${unmappedCount} ${unmappedCount === 1 ? "activity" : "activities"} awaiting an exact venue`;
     document.querySelector("#venue-map-layout").hidden = mapped.length === 0;
     document.querySelector("#unmapped-socials").hidden = unmapped.length === 0;
