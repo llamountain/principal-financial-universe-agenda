@@ -112,7 +112,7 @@ async function start() {
       : conferenceNotice;
     if (state.day === "wed") socialNotice.textContent = conferenceNotice.split(";")[0] + ".";
     document.querySelector("#social-section").insertBefore(
-      socialCallout, tuesday ? mappedSocials : document.querySelector("#social-results"));
+      socialCallout, tuesday || state.day === "wed" ? mappedSocials : document.querySelector("#social-results"));
     document.querySelector("#social-results").textContent = `${visibleSocials.length} ${tuesday ? "optional programs" : "social activities"} \u2022 optional; access and unconfirmed details are noted below`;
     socialList.replaceChildren();
     if (!visibleSocials.length) socialList.append(element("div", "empty", tuesday ? "No add-on programs match the current filters." : "No social activities match the current filters."));
