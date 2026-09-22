@@ -47,9 +47,15 @@ h2 { margin: 0 0 4px; font-size: clamp(24px, 4vw, 34px); letter-spacing: -.025em
 .section-heading p { margin: 0; max-width: 760px; color: var(--secondary); }
 .callout { margin-block: 16px; padding: 15px 17px; border: 1px solid #3fb9506b; border-radius: 11px; background: #3fb95014; }
 .callout strong { color: #3fb950; }
-.map-and-venues { display: grid; grid-template-columns: minmax(360px, 1.25fr) minmax(320px, .75fr); gap: 16px; align-items: stretch; }
-#venue-map { min-height: 530px; border: 1px solid var(--line); border-radius: 14px; background: var(--panel); box-shadow: 0 16px 48px #00000038; overflow: hidden; isolation: isolate; }
+.map-and-venues { display: grid; grid-template-columns: minmax(360px, 1.25fr) minmax(320px, .75fr); gap: 16px; align-items: start; }
+#venue-map { height: 620px; border: 1px solid var(--line); border-radius: 14px; background: var(--panel); box-shadow: 0 16px 48px #00000038; overflow: hidden; isolation: isolate; }
 .venues { display: grid; gap: 10px; }
+#venues { max-height: 620px; overflow-y: auto; }
+.venue-activity { margin-top: 12px; padding-top: 10px; border-top: 1px solid var(--line); font-size: 13px; }
+.venue-activity p { font-size: 12px; }
+.map-focus { padding: 0; background: transparent; }
+.number.provisional, .pin.provisional { background: #b87919; color: white; }
+.pin.provisional { border-style: dashed; }
 .venue-card { display: grid; grid-template-columns: 34px 1fr; gap: 12px; padding: 14px; border: 1px solid var(--line); border-radius: 11px; background: var(--panel); }
 .number { display: grid; place-items: center; width: 30px; height: 30px; border-radius: 50%; background: var(--accent); color: #06111d; font-weight: 800; }
 h3 { margin: 0; font-size: 15px; line-height: 1.35; }
@@ -61,7 +67,7 @@ h3 { margin: 0; font-size: 15px; line-height: 1.35; }
 .map-note { margin: 12px 2px 0; font-size: 12px; color: var(--secondary); }
 .map-error { padding: 20px; color: var(--secondary); }
 .social-day, .map-heading { margin: 24px 0 8px; font-size: 20px; }
-#social-section { scroll-margin-top: 100px; }
+#social-section, #mapped-socials { scroll-margin-top: 100px; }
 #mapped-socials > .map-note { margin-bottom: 14px; }
 [hidden] { display: none !important; }
 .leaflet-popup-content-wrapper, .leaflet-popup-tip { background: white; color: #1f2328; }
@@ -72,7 +78,7 @@ footer p { margin: 0 0 12px; }
   .intro { padding: 22px; }
   .entry { grid-template-columns: 1fr; gap: 10px; }
   .map-and-venues { grid-template-columns: 1fr; }
-  #venue-map { min-height: 420px; }
-  #social-section { scroll-margin-top: 200px; }
+  #venue-map { height: 420px; }
+  #social-section, #mapped-socials { scroll-margin-top: 200px; }
 }
 @media (prefers-reduced-motion: reduce) { .entry { transition: none; } .entry:hover { transform: none; } }

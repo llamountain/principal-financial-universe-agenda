@@ -46,6 +46,8 @@ async function start() {
   const socialList = document.querySelector("#social-activities");
   const venueList = document.querySelector("#venues");
   const mappedSocials = document.querySelector("#mapped-socials");
+  const unmappedList = document.querySelector("#unmapped-venues");
+  const locationsBySource = new Map(data.venues.flatMap(venue => venue.sourceIds.map(id => [id, venue])));
   let map;
   let markers;
   document.querySelector("#primary-count").textContent = data.sessions.filter(s => s.recommended).length;
@@ -60,7 +62,8 @@ async function start() {
     );
     const visibleSocials = data.socials.filter(social =>
       (state.day === "all" || state.day === social.day) &&
-      [social.title, social.category, social.format, social.reason, social.room, social.note]
+      [social.title, social.category, social.format, social.reason, social.room, social.note,
+        locationsBySource.get(social.sourceId).name, locationsBySource.get(social.sourceId).address]
         .join(" ").toLocaleLowerCase().includes(query)
     );
     document.querySelectorAll("button[data-day]").forEach(button =>
@@ -71,6 +74,9 @@ async function start() {
     const socialLink = element("a", "", `${visibleSocials.length} social activities`);
     socialLink.href = "#social-section";
     results.append(" \u2022 ", socialLink);
+    const mapLink = element("a", "", "Venue map");
+    mapLink.href = "#mapped-socials";
+    if (visibleSocials.length) results.append(" \u2022 ", mapLink);
     schedule.replaceChildren();
     if (!visible.length) {
       schedule.append(element("div", "empty", "No sessions match the current filters."));
@@ -89,8 +95,7 @@ async function start() {
       if (activities.length) socialList.append(element("h3", "social-day", title));
       for (const social of activities) socialList.append(agendaCard(social, true));
     }
-    const mapped = data.venues.filter(venue => visibleSocials.some(social => social.sourceId === venue.socialId));
-    renderVenues(mapped);
+    renderVenues(visibleSocials);
   }
   document.querySelectorAll("button[data-day]").forEach(button => button.addEventListener("click", () => {
     state.day = button.dataset.day;
@@ -104,36 +109,75 @@ async function start() {
     state.query = event.target.value;
     render();
   });
-  function renderVenues(venues) {
+  function activityDetails(social) {
+    const detail = element("div", "venue-activity");
+    detail.dataset.socialId = social.id;
+    detail.append(
+      element("strong", "", social.title),
+      element("div", "venue-time", `${social.date} \u00b7 ${social.time}`),
+      element("p", "", social.note)
+    );
+    if (social.url) detail.append(externalLink("Event details / RSVP", social.url, "directions"));
+    return detail;
+  }
+  function renderVenues(socials) {
+    const venues = data.venues.map(venue => ({
+      ...venue, activities: socials.filter(social => venue.sourceIds.includes(social.sourceId))
+    })).filter(venue => venue.activities.length);
+    const mapped = venues.filter(venue => venue.position);
+    const unmapped = venues.filter(venue => !venue.position);
+    const mappedCount = mapped.reduce((total, venue) => total + venue.activities.length, 0);
+    const unmappedCount = socials.length - mappedCount;
     mappedSocials.hidden = venues.length === 0;
+    document.querySelector("#map-heading").textContent = `Venue map: ${state.day === "all" ? "Wednesday & Thursday" : state.day === "wed" ? "Wednesday" : "Thursday"}`;
+    document.querySelector("#map-results").textContent = `${mapped.length} map ${mapped.length === 1 ? "location" : "locations"} covering ${mappedCount} ${mappedCount === 1 ? "activity" : "activities"} \u2022 ${unmappedCount} ${unmappedCount === 1 ? "activity" : "activities"} awaiting an exact venue`;
+    document.querySelector("#venue-map-layout").hidden = mapped.length === 0;
+    document.querySelector("#unmapped-socials").hidden = unmapped.length === 0;
     venueList.replaceChildren();
+    venueList.scrollTop = 0;
+    unmappedList.replaceChildren();
     if (markers) markers.clearLayers();
     for (const venue of venues) {
       const card = element("article", "venue-card");
-      card.append(element("span", "number", venue.number));
+      card.dataset.venueId = venue.id;
+      card.append(element("span", venue.provisional ? "number provisional" : "number", venue.number ?? "?"));
       const body = element("div");
       body.append(
         element("h3", "", venue.name),
-        element("div", "venue-time", `Wed, Oct 28 \u00b7 ${venue.time}`),
-        element("p", "", venue.reason),
-        element("span", "address", venue.address),
-        element("span", "venue-status", venue.status),
-        externalLink("Open directions", `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(venue.address)}`, "directions")
+        element("span", "venue-status", venue.locationNote)
       );
-      if (venue.url) body.append(externalLink("Host details / RSVP", venue.url, "directions"));
-      card.append(body);
-      venueList.append(card);
-      if (markers) {
-        const pin = element("span", "pin", venue.number);
+      if (venue.address) body.append(element("span", "address", venue.address));
+      if (venue.position) {
+        body.append(externalLink(
+          venue.provisional ? "Directions to reference location" : "Open directions",
+          `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(venue.address)}`, "directions"
+        ));
+      }
+      if (markers && venue.position) {
+        const pin = element("span", venue.provisional ? "pin provisional" : "pin", venue.number);
         const icon = L.divIcon({ html: pin, className: "", iconSize: [28, 28], iconAnchor: [14, 14] });
         const popup = element("div");
-        popup.append(element("strong", "", venue.name), element("div", "", venue.time), element("div", "", venue.status));
-        L.marker(venue.position, { icon, title: venue.name, alt: venue.name }).addTo(markers).bindPopup(popup);
+        popup.append(element("strong", "", venue.name), element("p", "", venue.locationNote));
+        for (const social of venue.activities) popup.append(activityDetails(social));
+        const marker = L.marker(venue.position, { icon, title: venue.name, alt: venue.name })
+          .addTo(markers).bindPopup(popup, { maxHeight: 260 });
+        const focus = element("button", "directions map-focus", "Show on map");
+        focus.type = "button";
+        focus.setAttribute("aria-label", `Show ${venue.name} on map`);
+        focus.addEventListener("click", () => {
+          map.setView(venue.position, 17, { animate: false });
+          marker.openPopup();
+          document.querySelector("#venue-map").scrollIntoView({ block: "center" });
+        });
+        body.append(focus);
       }
+      for (const social of venue.activities) body.append(activityDetails(social));
+      card.append(body);
+      (venue.position ? venueList : unmappedList).append(card);
     }
-    if (map && venues.length) {
+    if (map && mapped.length) {
       map.invalidateSize();
-      map.fitBounds(venues.map(venue => venue.position), { padding: [34, 34], maxZoom: 16 });
+      map.fitBounds(mapped.map(venue => venue.position), { padding: [34, 34], maxZoom: 16, animate: false });
     }
   }
   const container = document.querySelector("#venue-map");
@@ -144,6 +188,10 @@ async function start() {
   }
   map = L.map(container, { scrollWheelZoom: false });
   markers = L.layerGroup().addTo(map);
+  map.on("resize", () => {
+    const positions = markers.getLayers().map(marker => marker.getLatLng());
+    if (positions.length) map.fitBounds(positions, { padding: [34, 34], maxZoom: 16, animate: false });
+  });
   const tiles = L.tileLayer("https://tile.openstreetmap.org/{z}/{x}/{y}.png", {
     maxZoom: 19,
     attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'

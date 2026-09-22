@@ -796,74 +796,253 @@
   ],
   "venues": [
     {
+      "id": "radhaus",
       "number": 1,
-      "name": "Faros happy hour at Radhaus",
-      "time": "5:00–7:00 PM | Time unconfirmed | On campus",
+      "sourceIds": [
+        "faros"
+      ],
+      "name": "Radhaus",
       "address": "2 Marina Blvd, Building A, San Francisco",
       "position": [
-        37.806886,
-        -122.4322073
+        37.8064957,
+        -122.432096
       ],
-      "reason": "Compare engineering-outcome measurement and AI adoption with peers. After the 5:10 PM session finish, allow travel and plan to join around 5:30 PM.",
-      "status": "Date/venue published; 5-7 PM unconfirmed. Limited capacity; request a spot and await host confirmation.",
-      "url": "https://pages.faros.ai/connect-with-faros-at-github-universe",
-      "socialId": "faros"
+      "provisional": false,
+      "locationNote": "Venue published; event time and access still require confirmation."
     },
     {
+      "id": "broad-street",
       "number": 2,
-      "name": "Xebia's Broad Street Oyster Bash",
-      "time": "6:00–9:00 PM | Unconfirmed alternative",
+      "sourceIds": [
+        "xebia"
+      ],
+      "name": "Broad Street Oyster Co.",
       "address": "900 North Point St, Suite K201, San Francisco",
       "position": [
         37.8058477,
         -122.4229027
       ],
-      "reason": "Discuss practical AI adoption, reusable enablement, and enterprise modernization with peers. A possible later stop only after the host confirms the event and access.",
-      "status": "Unconfirmed schedule, venue, and access. Supplied RSVP unavailable; obtain current details from the host.",
-      "url": null,
-      "socialId": "xebia"
+      "provisional": true,
+      "locationNote": "Possible venue from the supplied event details; confirm the event and location with Xebia."
     },
     {
+      "id": "culinary-artistas",
       "number": 3,
-      "name": "Slalom AI in Motion",
-      "time": "5:30–7:30 PM | Unconfirmed team option",
+      "sourceIds": [
+        "slalom"
+      ],
+      "name": "Culinary Artistas",
       "address": "851 Beach St, San Francisco",
       "position": [
         37.8061975,
         -122.4230705
       ],
-      "reason": "Compare approaches to turning AI experiments into useful cross-functional workflows. An optional team networking choice after confirming the event, timing, and access.",
-      "status": "Unconfirmed date, hours, and venue. Supplied RSVP redirects to a general site; obtain an event link.",
-      "url": null,
-      "socialId": "slalom"
+      "provisional": true,
+      "locationNote": "Possible venue; date, hours, and event location remain unconfirmed."
     },
     {
+      "id": "sf-brewing",
       "number": 4,
-      "name": "Cloudsmith DevOps on Draft",
-      "time": "6:00–9:00 PM | Host approval required",
+      "sourceIds": [
+        "cloudsmith-eficode"
+      ],
+      "name": "San Francisco Brewing Co.",
       "address": "3150 Polk St, San Francisco",
       "position": [
         37.8057746,
         -122.4236489
       ],
-      "reason": "A useful gathering for Principal Financial's platform and security colleagues to discuss software-supply-chain controls, secure delivery, and DevOps practices.",
-      "status": "Published Oct 28; approval required. Co-hosts: Chainguard, Eficode, Octopus Deploy, Tailscale. Admission not secured.",
-      "url": "https://luma.com/git-together",
-      "socialId": "cloudsmith-eficode"
+      "provisional": false,
+      "locationNote": "Published venue; host approval is required."
     },
     {
+      "id": "bar-darling",
       "number": 5,
-      "name": "Insight happy hour at Bar Darling",
-      "time": "6:00–9:00 PM | Registration required",
+      "sourceIds": [
+        "insight"
+      ],
+      "name": "Bar Darling",
       "address": "2263 Chestnut St, San Francisco",
       "position": [
         37.8001729,
         -122.4405522
       ],
-      "reason": "Meet technology peers and GitHub experts, share lessons on developer adoption and governance, and identify useful technical follow-ups for the Principal Financial team.",
-      "status": "Published date/time/venue; limited capacity. Register with Insight; attendance and eligibility remain unconfirmed.",
-      "url": "https://cvent.me/0r7oBD",
-      "socialId": "insight"
+      "provisional": false,
+      "locationNote": "Published venue; register and confirm attendance with Insight."
+    },
+    {
+      "id": "greens",
+      "number": 6,
+      "sourceIds": [
+        "merge-tables",
+        "clubhouse-lounge",
+        "global-user-group",
+        "industry-breakfast"
+      ],
+      "name": "The Clubhouse at Greens",
+      "address": "Greens Restaurant, 2 Marina Blvd, Fort Mason, San Francisco",
+      "position": [
+        37.806886,
+        -122.4322073
+      ],
+      "provisional": true,
+      "locationNote": "Restaurant reference for the proposed Clubhouse programs on both days. Program details, access, and reservations remain unconfirmed."
+    },
+    {
+      "id": "pier",
+      "number": 7,
+      "sourceIds": [
+        "sonar"
+      ],
+      "name": "Pier 43 1/2 area",
+      "address": "Pier 43 1/2, Fisherman's Wharf, San Francisco",
+      "position": [
+        37.8091895,
+        -122.4151723
+      ],
+      "provisional": true,
+      "locationNote": "Approximate pier-area reference from the operator's visitor location. Sonar's event date, venue, and boarding point are unconfirmed; do not treat this as a boarding instruction."
+    },
+    {
+      "id": "for-the-record",
+      "number": 8,
+      "sourceIds": [
+        "neubird"
+      ],
+      "name": "For the Record",
+      "address": "2120 Greenwich St, San Francisco",
+      "position": [
+        37.7991883,
+        -122.4346664
+      ],
+      "provisional": true,
+      "locationNote": "Address reference only; event date, hours, venue, and access remain unconfirmed."
+    },
+    {
+      "id": "barrio",
+      "number": 9,
+      "sourceIds": [
+        "rubrik"
+      ],
+      "name": "Barrio at Ghirardelli Square",
+      "address": "900 North Point St, San Francisco",
+      "position": [
+        37.8061057,
+        -122.4223354
+      ],
+      "provisional": true,
+      "locationNote": "Possible Barrio location, not a confirmed Rubrik event address. Confirm the venue and event details with the host."
+    },
+    {
+      "id": "flores",
+      "number": 10,
+      "sourceIds": [
+        "bitrise"
+      ],
+      "name": "Flores San Francisco",
+      "address": "2030 Union St, San Francisco",
+      "position": [
+        37.7975643,
+        -122.4325655
+      ],
+      "provisional": false,
+      "locationNote": "Published venue; invitation and host acceptance required."
+    },
+    {
+      "id": "subpar",
+      "number": 11,
+      "sourceIds": [
+        "mintlify-entire"
+      ],
+      "name": "Subpar Miniature Golf",
+      "address": "Subpar Miniature Golf, Ghirardelli Square, San Francisco",
+      "position": [
+        37.8059266,
+        -122.4232078
+      ],
+      "provisional": true,
+      "locationNote": "Possible venue named in the supplied handoff, not confirmed by the event host. Obtain the exact venue and approval before traveling."
+    },
+    {
+      "id": "civic-kitchen",
+      "number": 12,
+      "sourceIds": [
+        "gitprotect"
+      ],
+      "name": "The Civic Kitchen",
+      "address": "2961 Mission St, San Francisco",
+      "position": [
+        37.7497324,
+        -122.418082
+      ],
+      "provisional": false,
+      "locationNote": "Published venue; selected Security/DevOps leaders only, subject to waitlist review and host confirmation."
+    },
+    {
+      "id": "market-street",
+      "number": 13,
+      "sourceIds": [
+        "figma"
+      ],
+      "name": "760 Market St - provisional Figma location",
+      "address": "760 Market St, San Francisco",
+      "position": [
+        37.7863711,
+        -122.4054895
+      ],
+      "provisional": true,
+      "locationNote": "Building reference only, not verification of Figma's headquarters or event venue. Thursday Oct 29 is inferred from a conflicting Sep 29 source date; confirm all details."
+    },
+    {
+      "id": "fort-mason",
+      "number": 14,
+      "sourceIds": [
+        "women-in-tech"
+      ],
+      "name": "Fort Mason campus - reception reference",
+      "address": "Fort Mason Center, San Francisco",
+      "position": [
+        37.8063329,
+        -122.432056
+      ],
+      "provisional": true,
+      "locationNote": "Approximate campus reference, not the exact Outdoor Theater @ Gateway Plaza entrance. Use the official on-site map and signage for the published reception location."
+    },
+    {
+      "id": "jellyfish-tbd",
+      "number": null,
+      "sourceIds": [
+        "jellyfish"
+      ],
+      "name": "Jellyfish dinner - venue to be announced",
+      "address": null,
+      "position": null,
+      "provisional": true,
+      "locationNote": "No confirmed address; no map pin or directions have been invented."
+    },
+    {
+      "id": "rewind-tbd",
+      "number": null,
+      "sourceIds": [
+        "rewind"
+      ],
+      "name": "Rewind gathering - exact venue unconfirmed",
+      "address": null,
+      "position": null,
+      "provisional": true,
+      "locationNote": "Redwood Empire Whiskey is named, but the event venue is not established. The brand's Vallejo visitor location is not assumed to be this event's location."
+    },
+    {
+      "id": "executive-lounge-tbd",
+      "number": null,
+      "sourceIds": [
+        "executive-partner-lounge"
+      ],
+      "name": "Executive and Partner Lounge - location unconfirmed",
+      "address": null,
+      "position": null,
+      "provisional": true,
+      "locationNote": "No confirmed location on either day. Special credentials are required; this is not general-pass access."
     }
   ]
 }

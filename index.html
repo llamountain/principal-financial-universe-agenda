@@ -52,18 +52,24 @@
       <p class="results" id="social-results" role="status">Loading social activities...</p>
       <div id="social-activities" class="schedule"></div>
       <div id="mapped-socials">
-        <h3 class="map-heading">Nearby Wednesday venue map</h3>
-        <p class="map-note">Map reference for five previously mapped sponsor venues, not every activity above. Other venues are listed on their cards; unconfirmed locations are not plotted. Use live directions for accessibility and current conditions.</p>
-        <div class="map-and-venues">
-          <div id="venue-map" role="region" aria-label="Map of listed Wednesday social venues"></div>
-          <div id="venues" class="venues"></div>
+        <h3 class="map-heading" id="map-heading">Venue map: Wednesday &amp; Thursday</h3>
+        <p class="map-note">All listed activities are represented below, grouped by venue. Blue pins indicate published event venues; amber pins are provisional locations or approximate campus/pier references, not confirmed destinations. Activities without a defensible location are listed separately, without invented pins. Day and search filters apply to both the map and venue list. Shared venues use one pin; use "Show on map" to inspect nearby pins individually.</p>
+        <p class="results" id="map-results" role="status"></p>
+        <div class="map-and-venues" id="venue-map-layout">
+          <div id="venue-map" role="region" aria-label="Map of Wednesday and Thursday social venues"></div>
+          <div id="venues" class="venues" role="region" aria-label="Mapped venues and activities; scroll for all locations" tabindex="0"></div>
+        </div>
+        <div id="unmapped-socials">
+          <h3 class="map-heading">Awaiting an exact venue</h3>
+          <p class="map-note">These activities remain part of your agenda. Confirm the location with the organizer before making travel plans.</p>
+          <div id="unmapped-venues" class="venues"></div>
         </div>
       </div>
     </section>
     <footer>
       <p><strong>Team coordination:</strong> This is one shared team route, not separate attendee or leadership tracks. Use the alternatives to divide coverage across code quality, agent controls, productivity measurement, and operations, then compare notes. Turn the most useful lessons into follow-up questions for your account team; no meeting or program access is reserved.</p>
       <p><strong>Planning:</strong> Times are PDT (UTC-7). The recommended sequence has no time overlaps. Transfers assume 10 minutes within a building or 15 between buildings, plus a minimum five-minute early arrival; allow more for queues and accessibility. Tight transfers are flagged. Official 20-minute early-arrival guidance is shown where applicable. Each alternative has replacement notes covering nearby conflicts and travel. Alternatives can overlap one another; recheck timing if combining several. Leave a session out for a longer lunch or team discussion.</p>
-      <p>Sessions and the Women in Tech reception checked against the official Universe catalog on September 22, 2026. Partner events and add-on details reflect the supplied handoff and research as of September 21, 2026. Figma's Thursday date is unconfirmed and inferred from a conflicting source date. Public session titles link to the official catalog; social cards link to host information where available. No invitations, registrations, or seats are confirmed.</p>
+      <p>Sessions and the Women in Tech reception checked against the official Universe catalog on September 22, 2026. Partner events and add-on details reflect the supplied handoff and research as of September 21, 2026. Figma's Thursday date is unconfirmed and inferred from a conflicting source date. Venue references checked September 22 against OpenStreetMap and venue information; finding a physical address does not confirm an event there. The pier reference uses the operator's <a href="https://www.redandwhite.com/directions-parking" target="_blank" rel="noopener noreferrer">visitor location</a>; use official on-site signage for the reception. Public session titles link to the official catalog; social cards link to host information where available. No invitations, registrations, or seats are confirmed.</p>
       <p>Prepared for the Principal Financial team by <strong>Lisa LaMountain, Account Executive, GitHub</strong>. Updated September 22, 2026.</p>
     </footer>
   </main>
