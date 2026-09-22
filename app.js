@@ -117,7 +117,7 @@ async function start() {
     if (!visibleSocials.length) socialList.append(element("div", "empty", tuesday ? "No add-on programs match the current filters." : "No social activities match the current filters."));
     for (const [day, title] of [["tue", "Tuesday, October 27 - unconfirmed"], ["wed", "Wednesday, October 28"], ["thu", "Thursday, October 29"], ["undated", "By arrangement - not confirmed for Tuesday"]]) {
       const activities = visibleSocials.filter(social => social.day === day);
-      if (activities.length) socialList.append(element("h3", "social-day", title));
+      if (activities.length && !tuesday) socialList.append(element("h3", "social-day", title));
       for (const social of activities) socialList.append(agendaCard(social, true));
     }
     renderVenues(visibleSocials);
