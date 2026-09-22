@@ -1,0 +1,66 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Principal Financial team agenda for GitHub Universe 2026, prepared by Lisa LaMountain.">
+  <meta name="referrer" content="strict-origin-when-cross-origin">
+  <title>Principal Financial | Team Agenda</title>
+  <link rel="icon" href="data:,">
+  <link rel="canonical" href="https://llamountain.github.io/principal-financial-universe-agenda/">
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css">
+  <link rel="stylesheet" href="./styles.css">
+  <script defer src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+  <script defer src="./app.js"></script>
+</head>
+<body>
+  <main class="page">
+    <header class="intro">
+      <div class="eyebrow">GitHub Universe 2026</div>
+      <h1>Principal Financial<br>Team Agenda</h1>
+      <p class="subtitle">One coordinated route for developers, platform engineers, security, and enablement teams: actionable code quality, secure CI/CD, observable agents, practical governance, and measurable adoption.</p>
+      <div class="stats">
+        <div><strong>2</strong><span>conference days</span></div>
+        <div><strong id="primary-count">15</strong><span>recommended sessions</span></div>
+        <div><strong id="alternative-count">7</strong><span>optional alternatives</span></div>
+        <div><strong>Oct 28-29</strong><span>Fort Mason, San Francisco</span></div>
+      </div>
+    </header>
+    <section class="filters" aria-label="Agenda filters">
+      <div class="toggle-group" aria-label="Conference day">
+        <button type="button" data-day="all" aria-pressed="true">Both days</button>
+        <button type="button" data-day="wed" aria-pressed="false">Wednesday</button>
+        <button type="button" data-day="thu" aria-pressed="false">Thursday</button>
+      </div>
+      <div class="toggle-group" aria-label="Session selection">
+        <button type="button" data-mode="primary" aria-pressed="true">Recommended</button>
+        <button type="button" data-mode="all" aria-pressed="false">Include alternatives</button>
+      </div>
+      <input id="query" type="search" aria-label="Filter sessions" placeholder="Filter by topic, title, or relevance...">
+    </section>
+    <p class="results" id="results" role="status">Loading team sessions...</p>
+    <section id="schedule" class="schedule" aria-label="Recommended conference agenda"></section>
+    <noscript><p class="empty">Enable JavaScript to display the agenda, filters, and venue map.</p></noscript>
+
+    <section class="evening" aria-labelledby="evening-heading">
+      <div class="section-heading">
+        <div class="eyebrow">Wednesday evening | October 28</div>
+        <h2 id="evening-heading">Happy hour recommendations</h2>
+        <p>Five nearby partner gatherings for technical peer exchange and team networking around GitHub Universe at Fort Mason.</p>
+      </div>
+      <div class="callout"><strong>Team networking:</strong> Consider Faros for engineering-outcome measurement or Cloudsmith for secure delivery and software-supply-chain conversations. Compare session takeaways across Principal Financial's development, platform, and security teams. Choose a primary gathering rather than trying to attend all five; confirm host details and RSVP before making plans.</div>
+      <div class="map-and-venues">
+        <div id="venue-map" role="region" aria-label="Map of happy hour venues near GitHub Universe"></div>
+        <div id="venues" class="venues"></div>
+      </div>
+      <p class="map-note">Event access is not reserved. Faros timing and all Xebia/Slalom details remain unconfirmed. Other published details must be reconfirmed with the host. Venue positions are reference points, not measured walking routes; use live directions for accessibility and current conditions.</p>
+    </section>
+    <footer>
+      <p><strong>Team coordination:</strong> This is one shared team route, not separate attendee or leadership tracks. Use the alternatives to divide coverage across code quality, agent controls, productivity measurement, and operations, then compare notes. Turn the most useful lessons into follow-up questions for your account team; no meeting or program access is reserved.</p>
+      <p><strong>Planning:</strong> Times are PDT (UTC-7). The recommended sequence has no time overlaps. Transfers assume 10 minutes within a building or 15 between buildings, plus a minimum five-minute early arrival; allow more for queues and accessibility. Tight transfers are flagged. Official 20-minute early-arrival guidance is shown where applicable. Each alternative has replacement notes covering nearby conflicts and travel. Alternatives can overlap one another; recheck timing if combining several. Leave a session out for a longer lunch or team discussion.</p>
+      <p>Sessions checked against the official Universe catalog on September 22, 2026. Partner-event status reflects research as of September 21, 2026; mapping references the supplied agenda. Public session titles link to the official catalog. No invitations, registrations, or seats are confirmed.</p>
+      <p>Prepared for the Principal Financial team by <strong>Lisa LaMountain, Account Executive, GitHub</strong>. Updated September 22, 2026.</p>
+    </footer>
+  </main>
+</body>
+</html>
