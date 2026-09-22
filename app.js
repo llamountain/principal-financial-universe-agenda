@@ -52,6 +52,7 @@ async function start() {
   const unmappedList = document.querySelector("#unmapped-venues");
   const socialDescription = document.querySelector("#social-description");
   const socialNotice = document.querySelector("#social-notice");
+  const socialCallout = socialNotice.parentElement;
   const conferenceDescription = socialDescription.textContent;
   const conferenceNotice = socialNotice.textContent;
   const locationsBySource = new Map(data.venues.flatMap(venue => venue.sourceIds.map(id => [id, venue])));
@@ -101,13 +102,16 @@ async function start() {
       wed: "Wednesday | October 28",
       thu: "Thursday | October 29"
     }[state.day];
-    document.querySelector("#evening-heading").textContent = tuesday ? "Tuesday add-ons & briefing options" : "Social activities & networking";
+    document.querySelector("#evening-heading").textContent = tuesday ? "Tuesday Welcome Reception and Meeting Briefings" : "Social activities & networking";
+    socialDescription.hidden = tuesday;
     socialDescription.textContent = tuesday
-      ? "The proposed Tuesday welcome reception and two optional briefing programs for the Principal Financial team. Briefings are grouped here for planning convenience, not assigned to Tuesday."
+      ? ""
       : conferenceDescription;
     socialNotice.textContent = tuesday
       ? "The welcome reception's date, time, and access remain unconfirmed. Both briefings are by arrangement: date, time, location, and organizer approval must be confirmed with your account team. No appointment or invitation is reserved, and executive eligibility does not imply team-wide access or a separate leadership track."
       : conferenceNotice;
+    document.querySelector("#social-section").insertBefore(
+      socialCallout, tuesday ? mappedSocials : document.querySelector("#social-results"));
     document.querySelector("#social-results").textContent = `${visibleSocials.length} ${tuesday ? "optional programs" : "social activities"} \u2022 optional; access and unconfirmed details are noted below`;
     socialList.replaceChildren();
     if (!visibleSocials.length) socialList.append(element("div", "empty", tuesday ? "No add-on programs match the current filters." : "No social activities match the current filters."));
